@@ -1,4 +1,4 @@
 public class Encoder {
 
-    //Placeholder. Encoder class declared for the future.
+    //Placeholder. Encoder class declared for the future as an EndGame Feature.
 }
