@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        PasswordGenerator generator = new PasswordGenerator();
+
         byte choice;
 
        do {
@@ -25,7 +27,7 @@ public class Main {
 
            switch (choice) {
                case 1:
-                   System.out.println("Call the Generate password method and ask for user input");
+                   generator.generate();        //Method to generate a password
                    break;
                case 2:
                    System.out.println("Call the manage password manager method and add an existing password");
@@ -44,11 +46,6 @@ public class Main {
            }
        } while(choice != 5);        //Only exit when user presses 5
 
-        System.out.println("Generating a Password...\n Please enter the password length: ");
-        int length = scanner.nextInt();
-
-        PasswordGenerator generator = new PasswordGenerator(length);
-        System.out.println(PasswordGenerator.generate());   //PlaceHolder Method call
         scanner.close();
 
         System.out.println("\nSaving Data...");

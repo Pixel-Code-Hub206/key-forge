@@ -1,14 +1,47 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class PasswordGenerator {
 
-    static int length;
+    public void generate(){
 
-    PasswordGenerator(int length){      //Constructor to define the parameters of the password generator
-        PasswordGenerator.length = length;
-    }
+        String label;
+        short length;
+        boolean addNumbers;         //Flag for the future to include numbers over user request
+        boolean addSymbols;         //Flag for the future to include symbols
+        String flag;
+        String flag2;
+        Scanner scanner = new Scanner(System.in);
 
-    public static String generate(){
+        System.out.print("Enter a label for this password(e.g., gmail): ");
+        label = scanner.nextLine().toLowerCase();
+
+        System.out.print("Enter desired length(e.g., 12): ");
+        length = scanner.nextShort();
+
+        System.out.print("Include numbers? (y/n): ");
+        flag = scanner.next().toLowerCase();
+        if(flag.equals("y"))
+        {
+            System.out.println("Including Numbers");
+            addNumbers = true;
+        }
+        else {
+            System.out.println("No numbers.");
+            addNumbers = false;
+        }
+
+        System.out.print("Include Symbols? (y/n): ");
+        flag2 = scanner.next().toLowerCase();
+        if(flag2.equals("y"))
+        {
+            System.out.println("Including Symbols");
+            addSymbols = true;
+        }
+        else {
+            System.out.println("No Symbols.");
+            addSymbols = false;
+        }
 
         String characterCollection = "abcdefghijklmnopqrstuvwxyz!@#$&=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -21,6 +54,9 @@ public class PasswordGenerator {
             char randChar = characterCollection.charAt(randIndex);
             password.append(randChar);
         }
-        return password.toString();
+
+        System.out.println("Generated Password: "+password.toString());
+        System.out.println("Would you like to save it? (y/n): ");
+        String saveFlag = scanner.next();
     }
 }
