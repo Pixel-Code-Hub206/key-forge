@@ -7,4 +7,8 @@ public class PasswordManager {
     public static void view(){
         //Placeholder for the view passwords method
     }
+
+    public static void delete(){
+        //Placeholder for the delete passwords method
+    }
 }

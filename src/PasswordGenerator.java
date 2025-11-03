@@ -9,8 +9,7 @@ public class PasswordGenerator {
         short length;
         boolean addNumbers;         //Flag for the future to include numbers over user request
         boolean addSymbols;         //Flag for the future to include symbols
-        String flag;
-        String flag2;
+        boolean save;
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a label for this password(e.g., gmail): ");
@@ -20,30 +19,17 @@ public class PasswordGenerator {
         length = scanner.nextShort();
 
         System.out.print("Include numbers? (y/n): ");
-        flag = scanner.next().toLowerCase();
-        if(flag.equals("y"))
-        {
-            System.out.println("Including Numbers");
-            addNumbers = true;
-        }
-        else {
-            System.out.println("No numbers.");
-            addNumbers = false;
-        }
+        addNumbers = scanner.nextLine().equalsIgnoreCase("y");
 
         System.out.print("Include Symbols? (y/n): ");
-        flag2 = scanner.next().toLowerCase();
-        if(flag2.equals("y"))
-        {
-            System.out.println("Including Symbols");
-            addSymbols = true;
-        }
-        else {
-            System.out.println("No Symbols.");
-            addSymbols = false;
-        }
+        addSymbols = scanner.nextLine().equalsIgnoreCase("y");
 
-        String characterCollection = "abcdefghijklmnopqrstuvwxyz!@#$&=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //Pool of characters according to user preference
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numbers = "0123456789";
+        String symbols = "!@#$%^&*_=+-/";
+        String characterCollection = "abcdefghijklmnopqrstuvwxyz!@#$&=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";    //Temporary joint character collection for testing
 
         StringBuilder password = new StringBuilder();
         Random random = new Random();       //Instantiating the object to call all its methods
@@ -57,6 +43,6 @@ public class PasswordGenerator {
 
         System.out.println("Generated Password: "+password.toString());
         System.out.println("Would you like to save it? (y/n): ");
-        String saveFlag = scanner.next();
+        save = scanner.nextLine().equalsIgnoreCase("y");        //True if user enter "Y" or "y", otherwise false
     }
 }
