@@ -42,7 +42,7 @@ public class Main {
                    System.out.println("Call the manage password manager method and add an existing password");
                    break;
                case 3:
-                   System.out.println("Viewing Saved passwords..\n");
+                   System.out.println("\nViewing Saved passwords....\n");
                    manager.view();
                    System.out.println();
                    break;
