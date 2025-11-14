@@ -5,6 +5,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         PasswordGenerator generator = new PasswordGenerator();
+        PasswordManager manager = new PasswordManager();
 
         byte choice;
 
@@ -27,19 +28,32 @@ public class Main {
 
            switch (choice) {
                case 1:
-                   generator.generate();        //Method to generate a password
+                   String password = generator.generate();        //Method to generate a password
+                   System.out.println("Do you want to save this password? (y/n): ");    //User wants to save it?
+                   boolean savePass = scanner.nextLine().equalsIgnoreCase("y");
+
+                   if(savePass){        //Add it to the manager if 'y'
+                       System.out.println("Enter a label for this password(e.g., gmail): ");
+                       String label = scanner.nextLine().toLowerCase();     //Label for the password
+                       manager.save(label, password);                       //Save the pair to the manager map
+                   }
                    break;
                case 2:
                    System.out.println("Call the manage password manager method and add an existing password");
                    break;
                case 3:
-                   System.out.println("View all Saved Passwords");
+                   System.out.println("Viewing Saved passwords..\n");
+                   manager.view();
+                   System.out.println();
                    break;
                case 4:
-                   System.out.println("Delete a Saved Password");
+                   System.out.println("Enter the password label to be deleted: ");
+                   String label = scanner.nextLine().toLowerCase();
+                   manager.delete(label);
                    break;
                case 5:
-                   System.out.println("Exit");
+                   System.out.println("\nSaving Data...");
+                   System.out.println("Goodbye! Stay secure with KeyForge. \uD83D\uDD12");
                    break;
                default:
                    System.out.println("Please Enter one of the following choice");
@@ -47,8 +61,5 @@ public class Main {
        } while(choice != 5);        //Only exit when user presses 5
 
         scanner.close();
-
-        System.out.println("\nSaving Data...");
-        System.out.println("Goodbye! Stay secure with KeyForge. \uD83D\uDD12");
     }
 }

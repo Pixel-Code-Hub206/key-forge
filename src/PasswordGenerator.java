@@ -3,23 +3,21 @@ import java.util.Scanner;
 
 public class PasswordGenerator {
 
-    public void generate(){
+    public String generate(){
 
-        String label;
         short length;
         boolean addNumbers;         //Flag for the future to include numbers over user request
         boolean addSymbols;         //Flag for the future to include symbols
-        boolean save;
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a label for this password(e.g., gmail): ");
-        label = scanner.nextLine().toLowerCase();
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter desired length(e.g., 12): ");
         length = scanner.nextShort();
 
         System.out.print("Include numbers? (y/n): ");
         addNumbers = scanner.nextLine().equalsIgnoreCase("y");
+
+        scanner.nextLine();         //Eats whitespace
 
         System.out.print("Include Symbols? (y/n): ");
         addSymbols = scanner.nextLine().equalsIgnoreCase("y");
@@ -31,7 +29,7 @@ public class PasswordGenerator {
         String symbols = "!@#$%^&*_=+-/";
         String characterCollection = "abcdefghijklmnopqrstuvwxyz!@#$&=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";    //Temporary joint character collection for testing
 
-        StringBuilder password = new StringBuilder();
+        StringBuilder password = new StringBuilder();   //The actual password
         Random random = new Random();       //Instantiating the object to call all its methods
 
         for(int i = 0; i < length; i++)
@@ -42,7 +40,7 @@ public class PasswordGenerator {
         }
 
         System.out.println("Generated Password: "+password.toString());
-        System.out.println("Would you like to save it? (y/n): ");
-        save = scanner.nextLine().equalsIgnoreCase("y");        //True if user enter "Y" or "y", otherwise false
+
+        return password.toString();
     }
 }

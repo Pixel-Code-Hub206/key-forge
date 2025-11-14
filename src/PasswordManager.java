@@ -1,14 +1,24 @@
+import java.util.HashMap;
+import java.util.Map;
 public class PasswordManager {
 
-    public static void save(){
-        //Placeholder for save passwords method
+    private Map<String, String> passwordMap = new HashMap<>();      //Storing label : value pairs - Scoped only for all the methods in this file
+
+    public void save(String label, String password){
+
+        passwordMap.put(label, password);                       //Saving the label : password pairs
+        System.out.println("Password Stored");
     }
 
-    public static void view(){
-        //Placeholder for the view passwords method
+    public void view(){
+        for(Map.Entry<String, String> entry : passwordMap.entrySet())
+        {
+            System.out.println(entry);
+        }
     }
 
-    public static void delete(){
-        //Placeholder for the delete passwords method
+    public void delete(String label){
+        passwordMap.remove(label);
+        System.out.println("Password Deleted");
     }
 }
