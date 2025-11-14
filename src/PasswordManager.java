@@ -10,7 +10,7 @@ public class PasswordManager {
     public void save(String label, String password){
 
         passwordMap.put(label, password);                       //Saving the label : password pairs
-        System.out.println("Password Stored");
+        System.out.println("Password for "+label+" saved successfully.\n");
     }
 
     public void view(){

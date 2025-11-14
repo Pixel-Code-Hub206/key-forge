@@ -39,7 +39,11 @@ public class Main {
                    }
                    break;
                case 2:
-                   System.out.println("Call the manage password manager method and add an existing password");
+                   System.out.println("Enter Label(e.g., instagram)");
+                   String customLabel = scanner.nextLine().toLowerCase();
+                   System.out.println("Enter your password: ");
+                   String customPassword = scanner.nextLine();          //Includes whatever characters, numbers and symbols that the user wants
+                   manager.save(customLabel, customPassword);
                    break;
                case 3:
                    System.out.println("\nViewing Saved passwords....\n");
