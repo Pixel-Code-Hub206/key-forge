@@ -29,6 +29,7 @@ public class Main {
            switch (choice) {
                case 1:
                    String password = generator.generate();        //Method to generate a password
+                   System.out.println("Generated Password: "+password);
                    System.out.println("Do you want to save this password? (y/n): ");    //User wants to save it?
                    boolean savePass = scanner.nextLine().equalsIgnoreCase("y");
 
