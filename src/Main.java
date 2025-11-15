@@ -48,7 +48,7 @@ public class Main {
                    manager.save(customLabel, customPassword);
                    break;
                case 3:
-                   System.out.println("\nViewing Saved passwords....\n");
+                   System.out.println("\nFetching Saved passwords....\n");
                    manager.view();
                    System.out.println();
                    break;
@@ -59,7 +59,7 @@ public class Main {
                    break;
                case 5:
                    System.out.println("\nSaving Data...");
-                   manager.persist();
+                   manager.persist();           //Writing/Saving the password into the selected file path
                    System.out.println("Goodbye! Stay secure with KeyForge. \uD83D\uDD12");
                    break;
                default:

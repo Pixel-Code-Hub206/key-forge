@@ -1,20 +1,33 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FileHandler {
 
-    private static final String FILE_PATH = "/home/pixel/Documents/saved_passwords.txt";        //Global method since both load and save passwords need this path
+    //Please set this FILE_PATH to where you want to save your passwords
+    //Creating global variable since both load and save passwords need this path
+    private static final String FILE_NAME = "saved_passwords.txt";      //The actual file name for the saved passwords
+    private static final Path FILE_PATH = Paths.get(        //Setting the file path according the home of the user's pc
+            System.getProperty("user.home"), ".keyForge", FILE_NAME);
+
+    private static void ensureDirectoryExists(){
+        try{
+            Files.createDirectories(FILE_PATH.getParent());           //To set the path according to the user's system after the program runs for the 1st time
+        }
+        catch(Exception e){
+            System.out.println("Could not create .keyforge directory: "+e.getMessage());
+        }
+    }
 
     public static Map<String, String> loadPasswords()    //Method to load passwords from file. Return types = map since we are checking for lines in file and returning in a map format
     {
+        ensureDirectoryExists();
         Map<String, String> map = new HashMap<>();          //To handle the passwords in the file handler and return it
-        File file = new File(FILE_PATH);                    //Initializing File path
 
-        if(!file.exists())                //If file doesn't exist yet, we can't load it the Hashmap to be displayed.
-            return map;
-
-        try(BufferedReader reader = new BufferedReader(new FileReader(file)))
+        try(BufferedReader reader = Files.newBufferedReader(FILE_PATH))
         {
             String line;
             while((line = reader.readLine()) != null){      //Read lines till we hit null
@@ -30,7 +43,6 @@ public class FileHandler {
 
                 map.put(label, decodedPassword);        //The map being displayed to the user in the console
             }
-            reader.close();         //Avoiding memory leaks
         }
         catch(FileNotFoundException e)
         {
@@ -40,12 +52,12 @@ public class FileHandler {
         {
             System.out.println("Error loading password from file: "+e.getMessage());               //Print the exception cause
         }
-        return map;         //The final map carrying all the decoded passwords
+        return map;         //The final map carrying all the decoded passwords. If directory doesn't exist, return an empty map.
     }
 
     public static void savePasswords(Map<String, String> map){
-
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))){
+        ensureDirectoryExists();
+        try(BufferedWriter writer = Files.newBufferedWriter(FILE_PATH)){
             for(Map.Entry<String, String> entry : map.entrySet()){          //'Map.Entry' since only one entry is to be taken. Not the whole map everytime
                 String label = entry.getKey();
                 String rawPassword = entry.getValue();
@@ -54,7 +66,6 @@ public class FileHandler {
                 writer.write(label+"="+encodedPassword);        //Saving in HashMap format
                 writer.newLine();                                   //Jump to next line
             }
-            writer.close();
         }
         catch (FileNotFoundException e){
             System.out.println("File not found..");
@@ -62,6 +73,5 @@ public class FileHandler {
         catch (IOException e){
             System.out.println("Error saving password to file: "+e.getMessage());                      //Print the exception cause
         }
-        return ;
     }
 }
