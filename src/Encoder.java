@@ -3,7 +3,7 @@ import java.util.Base64;
 public class Encoder {
 
     public static String encode(String rawPassword){
-        return Base64.getEncoder().encodeToString(rawPassword.getBytes());      //Returns the String after encoding it to write in the file
+        return Base64.getEncoder().encodeToString(rawPassword.getBytes());      //Returns the String after converting it to byte to encoded string to write in the file
     }
 
     public static String decode(String encodedPassword){

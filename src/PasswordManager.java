@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -5,7 +6,11 @@ import java.util.Scanner;
 public class PasswordManager {
 
     private Scanner scanner = new Scanner(System.in);
-    private Map<String, String> passwordMap = new HashMap<>();      //Storing label : value pairs - Scoped only for all the methods in this file
+    private Map<String, String> passwordMap;      //Storing label : value pairs - Scoped only for all the methods in this file
+
+    public PasswordManager(){           //Public constructor to load passwords from the file using the FileHandler's loadPasswords method
+        this.passwordMap = FileHandler.loadPasswords();
+    }
 
     public void save(String label, String password){
 
@@ -41,5 +46,9 @@ public class PasswordManager {
             System.out.println("❌ No Entry found for label: " + label);
             System.out.println();
         }
+    }
+
+    public void persist(){                  //'Actually saving' the passwords over a file
+        FileHandler.savePasswords(passwordMap);
     }
 }

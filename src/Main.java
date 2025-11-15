@@ -6,6 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         PasswordGenerator generator = new PasswordGenerator();
         PasswordManager manager = new PasswordManager();
+        FileHandler handler = new FileHandler();
 
         byte choice;
 
@@ -58,6 +59,7 @@ public class Main {
                    break;
                case 5:
                    System.out.println("\nSaving Data...");
+                   manager.persist();
                    System.out.println("Goodbye! Stay secure with KeyForge. \uD83D\uDD12");
                    break;
                default:
